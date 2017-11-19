@@ -54,18 +54,24 @@ class Solution(object):
             stack = [[0, "+"]]
             for j in range(0, len(res), 2):
                 num, op = res[j], res[j + 1]
-                if p[stack[-1][1]] < 1:
-                    stack.append([num, op])
-                else:
-                    stack[-1] = [operate(stack[-1][0], num, stack[-1][1]), op]
-            res, op = stack[0]
-            for j in range(1, len(stack)):
-                res = operate(res, stack[j][0], op)
-                op = stack[j][1]
+                while stack and p[stack[-1][1]] >= p[op]:
+                    num0, op0 = stack.pop()
+                    num = operate(num0, num, op0)
+                stack.append([num, op])
+                # # if p[stack[-1][1]] < 1: # in case: 1-0+2+3
+                #     stack.append([num, op])
+                # else:
+                #     stack[-1] = [operate(stack[-1][0], num, stack[-1][1]), op]
+            return stack[-1][0], i
+            # res, op = stack[0]
+            # for j in range(1, len(stack)):
+            #     res = operate(res, stack[j][0], op)
+            #     op = stack[j][1]
 
-            return res, i
+            # return res, i
 
         return dfs(0)[0]
 
 s = Solution()
-print(s.calculate("282-1*2*13-30-2*2*2/2-95/5*2+55+804+3024"))
+# print(s.calculate("282-1*2*13-30-2*2*2/2-95/5*2+55+804+3024"))
+print(s.calculate("1+2*(3)"))

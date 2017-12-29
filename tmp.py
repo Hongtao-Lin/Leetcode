@@ -53,13 +53,14 @@ def Tree2List(root):
 
 def logic2val(s):
     ops, n = [], len(s)
+
     def dfs(i):
         while i < n:
             while len(ops) >= 2 and len(ops[-1]) == 2 and ops[-1][1] <= ops[-2][1]:
-                    op2, v2 = ops.pop()
-                    op1, v1 = ops.pop()
-                    v = v1 and v2 if op1 else v1 or v2
-                    ops.append([int(v), op2])
+                op2, v2 = ops.pop()
+                op1, v1 = ops.pop()
+                v = v1 and v2 if op1 else v1 or v2
+                ops.append([int(v), op2])
 
             if s[i] == " ":
                 i += 1
@@ -87,7 +88,7 @@ def logic2val(s):
                 ops.append([0, -1])
                 continue
             elif s[i] == "(":
-                v, i = dfs(i+1)
+                v, i = dfs(i + 1)
                 ops.append([v])
             else:
                 i += 1
@@ -101,11 +102,15 @@ def logic2val(s):
             ops.append([v, op2])
         return ops[0][0], i
 
-    return dfs(0)[0] 
+    return dfs(0)[0]
 
+import operator, functools
 
-# 727. Minimum Window Subsequence
-def minWindow(s, t):
-    m, n = len(s), len(t)
-    dp = [[False]*n for _ in range(m)]
-    
+action = list(
+                   filter(lambda tup: tup[1] % 2 == 1, 
+                          map(lambda x, y: (x, y), 
+                              filter(lambda x: x % 2 == 0, range(5)), 
+                              range(5))
+                   ))
+
+print(action)

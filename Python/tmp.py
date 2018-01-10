@@ -105,12 +105,3 @@ def logic2val(s):
     return dfs(0)[0]
 
 import operator, functools
-
-action = list(
-                   filter(lambda tup: tup[1] % 2 == 1, 
-                          map(lambda x, y: (x, y), 
-                              filter(lambda x: x % 2 == 0, range(5)), 
-                              range(5))
-                   ))
-
-print(action)

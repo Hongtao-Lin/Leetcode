@@ -1,3 +1,3 @@
 # Leetcode
 
-Selected solution with analysis
+Selected solution with analysis.
